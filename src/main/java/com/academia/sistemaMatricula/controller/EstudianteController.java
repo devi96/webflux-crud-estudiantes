@@ -25,12 +25,14 @@ public class EstudianteController {
                 ResponseEntity.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(service.findAll())
-        );
+        ).defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/{id}")
     public Mono<ResponseEntity<Estudiante>> findById(@PathVariable String id) {
-        return service.findById(id).map(e-> ResponseEntity.ok()
+        return service.findById(id)
+                .map(e-> ResponseEntity
+                        .ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(e))
                 .defaultIfEmpty(ResponseEntity.notFound().build());
