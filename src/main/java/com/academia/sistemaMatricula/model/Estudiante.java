@@ -11,11 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Document(collection = "estudiantes")
-public class Estudiante {
-
-    @Id
-    @EqualsAndHashCode.Include
-    private String id;
+public class Estudiante extends IdentificableEntity<String> {
     private String nombres;
     private String apellidos;
     private String dni;

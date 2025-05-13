@@ -17,4 +17,20 @@ public class MatriculaServiceImpl extends CRUDImpl<Matricula, String> implements
     protected IGenericRepo<Matricula, String> getRepo(){
         return repo;
     }
+
+    @Override
+    protected void applyUpdates(Matricula existing, Matricula updated) {
+        if (updated.getFechaMatricula() != null) {
+            existing.setFechaMatricula(updated.getFechaMatricula());
+        }
+
+        if (updated.getEstudiante() != null) {
+            existing.setEstudiante(updated.getEstudiante());
+        }
+
+        if (updated.getCursos() != null) {
+            existing.setCursos(updated.getCursos());
+        }
+            existing.setEstado(updated.isEstado());
+    }
 }

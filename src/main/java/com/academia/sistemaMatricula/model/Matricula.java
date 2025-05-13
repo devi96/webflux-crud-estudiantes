@@ -15,13 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Document(collection = "matriculas")
-public class Matricula {
-    @Id
-    @EqualsAndHashCode.Include
-    private String id;
+public class Matricula extends IdentificableEntity<String> {
     private LocalDateTime fechaMatricula;
     private Estudiante estudiante;
     private List<Curso> cursos;
     private boolean estado;
-
 }

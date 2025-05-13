@@ -19,4 +19,22 @@ public class EstudianteServiceImpl extends CRUDImpl<Estudiante, String> implemen
     protected IGenericRepo<Estudiante, String> getRepo(){
      return repo;
     }
+    @Override
+    protected void applyUpdates(Estudiante existing, Estudiante updated) {
+        if (updated.getNombres() != null && !updated.getNombres().isBlank()) {
+            existing.setNombres(updated.getNombres());
+        }
+
+        if (updated.getApellidos() != null && !updated.getApellidos().isBlank()) {
+            existing.setApellidos(updated.getApellidos());
+        }
+
+        if (updated.getEdad() > 0) {
+            existing.setEdad(updated.getEdad());
+        }
+
+        if (updated.getDni() != null && !updated.getDni().isBlank()) {
+            existing.setDni(updated.getDni());
+        }
+    }
 }

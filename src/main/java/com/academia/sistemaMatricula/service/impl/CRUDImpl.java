@@ -1,14 +1,15 @@
 package com.academia.sistemaMatricula.service.impl;
 
-import com.academia.sistemaMatricula.model.Estudiante;
+import com.academia.sistemaMatricula.model.IdentificableEntity;
 import com.academia.sistemaMatricula.repository.IGenericRepo;
 import com.academia.sistemaMatricula.service.ICRUD;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID> {
+public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID>{
 
     protected abstract IGenericRepo<T, ID> getRepo();
+    protected abstract void applyUpdates(T existing, T updated);
 
     @Override
     public Mono<T> save(T t) {
@@ -19,7 +20,10 @@ public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID> {
     public Mono<T> update(ID id, T t) {
         //validar ID
         return getRepo().findById(id)
-                .flatMap( e -> getRepo().save(t));
+                .flatMap( exist -> {
+                    applyUpdates(exist, t);
+                    return getRepo().save(exist);
+                });
     }
 
     @Override

@@ -18,4 +18,15 @@ public class CursoServiceImpl extends CRUDImpl<Curso, String> implements ICursoS
     protected IGenericRepo<Curso, String> getRepo() {
         return repo;
     }
+    @Override
+    protected void applyUpdates(Curso existing, Curso updated) {
+        if (updated.getNombre() != null && !updated.getNombre().isBlank()) {
+            existing.setNombre(updated.getNombre());
+        }
+        if (updated.getSiglas() != null && !updated.getSiglas().isBlank()) {
+            existing.setSiglas(updated.getSiglas());
+        }
+        existing.setEstado(updated.isEstado());
+    }
+
 }
