@@ -1,0 +1,430 @@
+{
+	"info": {
+		"_postman_id": "fe70e57d-e69e-46d1-9bb3-f98a308c53d2",
+		"name": "SistemaMatricula",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5391752"
+	},
+	"item": [
+		{
+			"name": "Seguridad",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"hola\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Curso",
+			"item": [
+				{
+					"name": "Eliminar Curso",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/cursos/6824256c7f61721b7d2c7c7b",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cursos",
+								"6824256c7f61721b7d2c7c7b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Curso por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/cursos/6824256c7f61721b7d2c7c7b",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cursos",
+								"6824256c7f61721b7d2c7c7b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Todos los Cursos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/cursos",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cursos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Curso",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"1\",\n    \"nombre\": \"Curso de Mecatronica I\",\n    \"siglas\": \"M\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cursos/6824256c7f61721b7d2c7c7b",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cursos",
+								"6824256c7f61721b7d2c7c7b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Curso",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Curso de MECATRONICA\",\n    \"siglas\": \"MECAI\",\n    \"estado\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cursos",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cursos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alumno",
+			"item": [
+				{
+					"name": "GET findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/estudiantes?order=desc",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"estudiantes"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/estudiantes/682415e16feb01068a8c6d6as1asd",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"estudiantes",
+								"682415e16feb01068a8c6d6as1asd"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombres\": \"Arnold\",\r\n    \"apellidos\": \"schawneger\",\r\n    \"dni\": 22345148,\r\n    \"edad\": 21\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/estudiantes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombres\": \"Alexis\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/estudiantes/6824165f1cf7323b0f8f08aa",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"estudiantes",
+								"6824165f1cf7323b0f8f08aa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/estudiantes/68243d61293aba189df21ee3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"estudiantes",
+								"68243d61293aba189df21ee3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Matricula",
+			"item": [
+				{
+					"name": "Crear Matricula",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fechaMatricula\": \"2024-06-15T12:00:00\",\n  \"estudiante\": {\n        \"id\": \"682440356bbb6c6c5a6c33ec\"\n    },\n  \"cursos\": [\n    {\n      \"id\": \"68243d6b293aba189df21ee4\"\n    },\n    {\n      \"id\": \"68243da4293aba189df21ee5\"\n    }\n  ],\n  \"estado\": true\n}"
+						},
+						"url": {
+							"raw": "{{host}}/matriculas/registrar",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"matriculas",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Matricula",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/matriculas/6824403d6bbb6c6c5a6c33ed",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"matriculas",
+								"6824403d6bbb6c6c5a6c33ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Matricula",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fechaMatricula\": \"2025-06-15T12:00:00\",\n  \"estudiante\": {\n        \"id\": \"682440356bbb6c6c5a6c33ec\"\n    },\n  \"cursos\": [\n    {\n      \"id\": \"68243d6b293aba189df21ee4\"\n    },\n    {\n      \"id\": \"68243da4293aba189df21ee5\"\n    }\n  ],\n  \"estado\": true\n}"
+						},
+						"url": {
+							"raw": "{{host}}/matriculas/6824409618829c6b03cd92dc",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"matriculas",
+								"6824409618829c6b03cd92dc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Todas las Matriculas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/matriculas",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"matriculas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Matricula por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/matriculas/6824409618829c6b03cd92dc",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"matriculas",
+								"6824409618829c6b03cd92dc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJBRE1JTiJdLCJ1c2VybmFtZSI6ImFkbWluIiwic3ViIjoiYWRtaW4iLCJpYXQiOjE3NDcyNTgxNzEsImV4cCI6MTc0NzI3NjE3MX0.-KjILqdbuysZiBKBNtmbMDvO5ynTf5glnmLmYOEC0L50xygUG-GKPyp-DFyB0bP0r8Ek-0EKgKjfRFc-dtjR2Q",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}
