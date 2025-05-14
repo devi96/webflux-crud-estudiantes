@@ -26,7 +26,9 @@ public class CursoServiceImpl extends CRUDImpl<Curso, String> implements ICursoS
         if (updated.getSiglas() != null && !updated.getSiglas().isBlank()) {
             existing.setSiglas(updated.getSiglas());
         }
-        existing.setEstado(updated.isEstado());
+        if (updated.getEstado() != null) {
+            existing.setEstado(updated.getEstado());
+        }
     }
 
 }

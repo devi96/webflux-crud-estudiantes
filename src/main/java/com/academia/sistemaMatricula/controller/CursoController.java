@@ -1,9 +1,11 @@
 package com.academia.sistemaMatricula.controller;
 
+import com.academia.sistemaMatricula.dto.CursoDTO;
 import com.academia.sistemaMatricula.model.Curso;
-import com.academia.sistemaMatricula.model.Estudiante;
 import com.academia.sistemaMatricula.service.ICursoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +16,14 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/cursos")
 @RequiredArgsConstructor
 public class CursoController {
+
     private final ICursoService service;
+    private final ModelMapper modelMapper;
 
     @GetMapping("{id}")
-    public Mono<ResponseEntity<Curso>> findById(@PathVariable String id){
+    public Mono<ResponseEntity<CursoDTO>> findById(@PathVariable String id){
         return service.findById(id)
+                .map(e -> convertToDto(e))
                 .map( e -> ResponseEntity
                         .ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -26,25 +31,29 @@ public class CursoController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
     @GetMapping
-    public Mono<ResponseEntity<Flux<Curso>>> findAll() {
-        return Mono.just(
-                ResponseEntity.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(service.findAll())
-        ).defaultIfEmpty(ResponseEntity.notFound().build());
+    public Mono<ResponseEntity<Flux<CursoDTO>>> findAll() {
+        Flux<CursoDTO> fx = service.findAll()
+                .map(this::convertToDto);
+        return Mono.just(ResponseEntity
+                .ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(fx))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Mono<ResponseEntity<Curso>> save(@RequestBody Curso curso){
-        return service.save(curso)
+    public Mono<ResponseEntity<CursoDTO>> save(@Valid @RequestBody CursoDTO cursoDTO){
+        return service.save(this.convertToEntity(cursoDTO))
+                .map(this::convertToDto)
                 .map( e -> ResponseEntity
                         .ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(e));
     }
     @PutMapping("/{id}")
-    public Mono<ResponseEntity<Curso>> update(@PathVariable String id, @RequestBody Curso curso) {
-        return service.update(id, curso)
+    public Mono<ResponseEntity<CursoDTO>> update(@PathVariable String id, @Valid @RequestBody CursoDTO cursoDTO) {
+        return service.update(id, this.convertToEntity(cursoDTO))
+                .map(this::convertToDto)
                 .map(e -> ResponseEntity.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(e))
@@ -61,4 +70,12 @@ public class CursoController {
                     }
                 });
     }
+
+    private CursoDTO convertToDto(Curso curso) {
+        return modelMapper.map(curso, CursoDTO.class);
+    }
+    private Curso convertToEntity(CursoDTO cursoDTO) {
+        return modelMapper.map(cursoDTO, Curso.class);
+    }
+
 }

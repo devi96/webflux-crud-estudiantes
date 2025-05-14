@@ -15,6 +15,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Curso extends IdentificableEntity<String>{
     private String nombre;
     private String siglas;
-    private boolean estado;
+    private Boolean estado;
 
 }

@@ -15,5 +15,5 @@ public class Estudiante extends IdentificableEntity<String> {
     private String nombres;
     private String apellidos;
     private String dni;
-    private int edad;
+    private Integer edad;
 }
