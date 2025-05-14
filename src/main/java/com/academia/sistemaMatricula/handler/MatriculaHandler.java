@@ -46,11 +46,11 @@ public class MatriculaHandler {
     }
 
     @PostMapping
-    public Mono<ServerResponse> save(ServerRequest request){
+    public Mono<ServerResponse> registrarMatricula(ServerRequest request){
         Mono<MatriculaDTO> monoMatriculaDTO = request.bodyToMono(MatriculaDTO.class);
         return monoMatriculaDTO
                 .map(this::convertToEntity)
-                .flatMap(service::save)
+                .flatMap(service::registrarMatricula)
                 .map(this::convertToDto)
                 .flatMap(e -> ServerResponse
                         .ok()

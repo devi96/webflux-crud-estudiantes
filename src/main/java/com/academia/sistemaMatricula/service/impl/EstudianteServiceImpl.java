@@ -5,6 +5,7 @@ import com.academia.sistemaMatricula.repository.IEstudianteRepo;
 import com.academia.sistemaMatricula.repository.IGenericRepo;
 import com.academia.sistemaMatricula.service.IEstudianteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -36,5 +37,12 @@ public class EstudianteServiceImpl extends CRUDImpl<Estudiante, String> implemen
         if (updated.getDni() != null && !updated.getDni().isBlank()) {
             existing.setDni(updated.getDni());
         }
+    }
+    @Override
+    public Flux<Estudiante> findAll(String order){
+        Sort sort = order.equalsIgnoreCase("desc")
+                ? Sort.by("edad").descending()
+                : Sort.by("edad").ascending();
+        return repo.findAll(sort);
     }
 }

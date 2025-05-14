@@ -35,7 +35,7 @@ public class RouterConfig {
     public RouterFunction<ServerResponse> invoiceRoutes(MatriculaHandler handler) {
         return route(GET("/v2/matriculas"), handler::findAll)
                 .andRoute(GET("/v2/matriculas/{id}"), handler::findById)
-                .andRoute(POST("/v2/matriculas"), handler::save)
+                .andRoute(POST("/v2/matriculas/registrar"), handler::registrarMatricula)
                 .andRoute(PUT("/v2/matriculas/{id}"), handler::update)
                 .andRoute(DELETE("/v2/matriculas/{id}"), handler::delete);
     }

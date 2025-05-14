@@ -26,8 +26,8 @@ public class EstudianteController {
     private final ModelMapper modelMapper;
 
     @GetMapping
-    public Mono<ResponseEntity<Flux<EstudianteDTO>>> findAll() {
-        Flux<EstudianteDTO> fx = service.findAll()
+    public Mono<ResponseEntity<Flux<EstudianteDTO>>> findAll(@RequestParam(value = "order", required = false, defaultValue = "asc") String order) {
+        Flux<EstudianteDTO> fx = service.findAll(order)
                 .map(this::convertToDto);
         return Mono.just(ResponseEntity
                 .ok()
